@@ -1,0 +1,36 @@
+server:
+  port: 8081
+  tomcat:
+    threads:
+      max: 200 # O Tomcat gerenciará as requisições
+
+spring:
+  application:
+    name: cidadao-service
+  
+  # Habilitando Virtual Threads (Project Loom)
+  threads:
+    virtual:
+      enabled: true
+
+  # Configuração de persistência independente (Redis)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0 # Podemos separar os microserviços por index de database se desejar
+
+# Documentação automática da API
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+
+# Logs para monitoramento das Virtual Threads
+logging:
+  level:
+    br.com.government.cidadao: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
